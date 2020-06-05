@@ -1,0 +1,64 @@
+﻿import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+// used to create fake backend
+import { fakeBackendProvider } from '@app/helpers/fake-backend';
+
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+
+import { BasicAuthInterceptor } from '@app/helpers/basic-auth.interceptor';
+import { ErrorInterceptor } from '@app/helpers/error.interceptor';
+
+import { HomeComponent } from '@app/home/home.component';
+import { LoginComponent } from '@app/login/login.component';
+import {AuthenticationService} from '@app/authentication.service';
+import {UserService} from '@app/user.service';
+import {AppMaterialModule} from '@app/material-module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+import { EditableComponent } from '@app/editable/editable.component';
+import { ViewModeDirective } from '@app/editable/view-mode.directive';
+import { EditModeDirective } from '@app/editable/edit-mode.directive';
+import { FocusableDirective } from '@app/focusable.directive';
+import { EditableOnEnterDirective } from '@app/editable/edit-on-enter.directive';
+import { ResizableModule } from 'angular-resizable-element';
+
+@NgModule({
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        AppMaterialModule,
+        CommonModule,
+        ResizableModule,
+    ],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        LoginComponent,
+        EditableComponent,
+        ViewModeDirective,
+        EditModeDirective,
+        FocusableDirective,
+        EditableOnEnterDirective
+    ],
+    providers: [
+      AuthenticationService,
+      UserService,
+        { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+        // provider used to create fake backend
+        fakeBackendProvider
+    ],
+    bootstrap: [AppComponent]
+})
+export class AppModule { }

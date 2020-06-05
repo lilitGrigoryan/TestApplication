@@ -1,0 +1,10 @@
+﻿<mat-toolbar color="primary" *ngIf="user">
+  <mat-toolbar-row>
+    <span><a class="nav-item nav-link" routerLink="/">Home</a></span>
+    <span class="example-spacer"></span>
+    <mat-icon class="example-icon" (click)="logout()" aria-hidden="false" aria-label="Example logout icon">logout</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

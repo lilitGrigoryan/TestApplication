@@ -1,0 +1,32 @@
+﻿<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource"  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+    <mat-header-row *matHeaderRowDef="displayedColumns;" class="mat-elevation-z1" ></mat-header-row>
+    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+      <mat-header-cell cdkDrag
+                       *matHeaderCellDef
+                       mwlResizable [enableGhostResize]="true"
+                       (resizeEnd)="onResizeEnd($event, column)"
+                       [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+        {{ column | titlecase }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element; let index = index" >
+        <editable (update)="updateField(index, column)">
+          <ng-template viewMode>
+            {{element[column]}}
+          </ng-template>
+          <ng-template editMode>
+            <mat-form-field class="example-full-width">
+              <input matInput [formControl]="getControl(index, column)">
+              <mat-error *ngIf="getControl(index, column).hasError('required')">
+                Field is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </ng-template>
+        </editable>
+      </mat-cell>
+    </ng-container>
+    <mat-row id="row-{{index}}" *matRowDef="let row; columns: displayedColumns; let index = index;" >
+    </mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]"></mat-paginator>
+</div>
