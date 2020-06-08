@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
     controls: FormArray;
     displayedColumns: string[] = [];
     constructor(private userService: UserService, private core: CoreService) { }
-    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
 
     ngOnInit() {
@@ -43,8 +42,6 @@ export class HomeComponent implements OnInit {
         });
         this.controls = new FormArray(toGroups);
         this.dataSource = new MatTableDataSource( this.core.list$.value );
-        this.dataSource.paginator = this.paginator;
-
       });
     }
    drop(event: CdkDragDrop<string[]>) {
@@ -68,7 +65,6 @@ export class HomeComponent implements OnInit {
       if (control.valid) {
         this.core.update(index, field, control.value);
         this.dataSource = new MatTableDataSource( this.core.list$.value );
-        this.dataSource.paginator = this.paginator;
       }
     }
     getControl(index, fieldName) {

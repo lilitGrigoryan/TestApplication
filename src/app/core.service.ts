@@ -10,10 +10,10 @@ export class CoreService {
   list$ = new BehaviorSubject(this.list);
 
   constructor() {
-    for (let i = 1; i < 5; i++) {
+    for (let i = 1; i < 15; i++) {
       this.column.push('Col' + i);
     }
-    for (let i = 0; i < 6000; i++) {
+    for (let i = 0; i < 1000; i++) {
       const item = {};
       for (let j = 0; j < this.column.length; j++) {
         item[this.column[j]] = this.makeid();
