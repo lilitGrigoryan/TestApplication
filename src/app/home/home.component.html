@@ -1,5 +1,16 @@
-﻿<p-table [columns]="displayedColumns" [value]="dataSource" [scrollable]="true" scrollHeight="200px" [resizableColumns]="true" [rows]="100" scrollHeight="850px" 
-[virtualScroll]="true" [virtualRowHeight]="34">
+﻿<div>
+  <input type=number [(ngModel)]="rowCount" (ngModelChange)="onChange($event)"/>
+  <input  type=number [(ngModel)]="columnCount" (ngModelChange)="onChange($event)"/>
+</div>
+
+<p-table  
+  [columns]="displayedColumns" id=""
+  [value]="dataSource"
+  [scrollable]="true"
+  scrollHeight="800px"
+  [resizableColumns]="true"
+  [rows]="100" scrollHeight="750px" [showLoader]="true" [virtualScrollDelay]="1000" (scroll)="loadCarsLazy($event)" [loading]="loading"
+[virtualScroll]="true">
   <ng-template pTemplate="colgroup" let-columns>
       <colgroup>
           <col *ngFor="let col of displayedColumns" [style.width]="col.width">
@@ -7,14 +18,14 @@
   </ng-template>
   <ng-template pTemplate="header" let-columns>
       <tr>
-          <th *ngFor="let col of displayedColumns" pResizableColumn>
+          <th *ngFor="let col of displayedColumns" pResizableColumn > 
               {{col.header}}
           </th>
       </tr>
   </ng-template>
   <ng-template pTemplate="body" let-rowData let-columns="columns">
       <tr>
-          <td *ngFor="let col of displayedColumns" class="ui-resizable-column"  pEditableColumn>
+          <td *ngFor="let col of displayedColumns" class="ui-resizable-column"  columnResizeMode="fit"  pEditableColumn>
               <p-cellEditor>
                   <ng-template pTemplate="input">
                       <input pInputText type="text" [(ngModel)]="rowData[col.field]">

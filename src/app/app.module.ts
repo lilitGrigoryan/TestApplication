@@ -33,7 +33,7 @@ import { EditableOnEnterDirective } from '@app/editable/edit-on-enter.directive'
 import { ResizableModule } from 'angular-resizable-element';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgHttpLoaderModule } from 'ng-http-loader';
-import {TableModule} from 'primeng/table';
+import {TableModule, InputNumberModule } from 'primeng';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
@@ -50,6 +50,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         TableModule,
         FormsModule,
         ScrollingModule,
+        InputNumberModule,
         NgHttpLoaderModule.forRoot(), 
     ],
     declarations: [

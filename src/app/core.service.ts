@@ -12,7 +12,7 @@ export class CoreService {
     for (let i = 1; i < 101; i++) {
       this.column.push({field: 'col' + i, header: 'col' + i, width: '100px'});
     }
-    for (let i = 0; i < 16000; i++) {
+    for (let i = 0; i < 6000; i++) {
       let item = {id: this.list.length};
       for (let j = 0; j < this.column.length; j++) {
         if(j !== 0) {
@@ -22,9 +22,11 @@ export class CoreService {
       this.list.push(item);
     }
   }
-
+  setRow(count) {
+   
+  }
   makeid() {
-    const length = Math.floor(Math.random() * 10);
+    const length = Math.floor(Math.random() * 50);
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const charactersLength = characters.length;
@@ -33,15 +35,19 @@ export class CoreService {
     }
     return result;
   }
-  setData() {
-    for (let i = 0; i < 1000; i++) {
-      const item = {};
+  setData(count, rowCount) {
+    this.list = [];
+    this.column = [{field: 'id', header: 'id', width: '100px'}];
+    for (let i = 1; i < count; i++) {
+      this.column.push({field: 'col' + i, header: 'col' + i, width: '100px'});
+    }
+    for (let i = 0; i < rowCount; i++) {
+      let item = {id: this.list.length};
       for (let j = 0; j < this.column.length; j++) {
-        if(j == 0) {
-          item['id'] = this.list.length; 
-        } else {
+        if(j !== 0) {
           item[this.column[j].field] = this.makeid();
-        }      }
+        }
+      }
       this.list.push(item);
     }
     return this.list;

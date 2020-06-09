@@ -9,6 +9,7 @@ import { UserService } from '@app/user.service';
 import { ResizeEvent} from 'angular-resizable-element';
 import { SpinnerVisibilityService } from 'ng-http-loader';
 import {LazyLoadEvent} from 'primeng/api';
+import {InputNumberModule} from 'primeng/inputnumber';
 
 
 
@@ -26,6 +27,8 @@ export class HomeComponent implements OnInit {
     loading = false;
     users: User[];
     dataSource = [];
+    columnCount = 100;
+    rowCount = 100000
     clonedataSource = [];
     controls: FormArray;
     displayedColumns = [];
@@ -40,7 +43,19 @@ export class HomeComponent implements OnInit {
         this.spinner.hide();
       });
     }
-    
+    loadCarsLazy(event: LazyLoadEvent) {
+      console.log('loading.................');
+      this.loading = true;
+
+      setTimeout(() => {
+              this.loading = false;    
+      }, 10000);
+    }
+    onChange(newValue) {
+      this.dataSource = this.core.setData(this.columnCount + 1, this.rowCount + 1);
+      this.displayedColumns = this.core.column;
+      console.log(this.dataSource);
+    }
     ngOnInit() {
       
     }
