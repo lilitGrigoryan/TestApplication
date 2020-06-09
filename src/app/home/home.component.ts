@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     users: User[];
     dataSource = [];
     columnCount = 100;
-    rowCount = 100000
+    rowCount = 600;
     clonedataSource = [];
     controls: FormArray;
     displayedColumns = [];
@@ -42,22 +42,16 @@ export class HomeComponent implements OnInit {
         this.dataSource = this.core.list;
         this.spinner.hide();
       });
-    }
-    loadCarsLazy(event: LazyLoadEvent) {
-      console.log('loading.................');
-      this.loading = true;
-
-      setTimeout(() => {
-              this.loading = false;    
-      }, 10000);
-    }
-    onChange(newValue) {
+    }  
+    tableDataUpdate() {
+      this.loading = true; 
+      this.dataSource = [];  
       this.dataSource = this.core.setData(this.columnCount + 1, this.rowCount + 1);
       this.displayedColumns = this.core.column;
       console.log(this.dataSource);
+      this.loading = false; 
     }
-    ngOnInit() {
-      
+    ngOnInit() {    
     }
     
 }

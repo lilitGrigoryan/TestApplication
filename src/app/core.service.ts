@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +8,10 @@ export class CoreService {
   column = [{field: 'id', header: 'id', width: '100px'}];
 
   constructor() {
-    for (let i = 1; i < 101; i++) {
-      this.column.push({field: 'col' + i, header: 'col' + i, width: '100px'});
+    for (let i = 1; i < 100; i++) {
+      this.column.push({field: 'col' + i, header: 'col' + i, width: '150px'});
     }
-    for (let i = 0; i < 6000; i++) {
+    for (let i = 0; i < 6001; i++) {
       let item = {id: this.list.length};
       for (let j = 0; j < this.column.length; j++) {
         if(j !== 0) {
